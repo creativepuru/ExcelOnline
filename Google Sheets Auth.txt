@@ -1,0 +1,50 @@
+private SheetsService sheetsService;		// inside public partial class Form1 : Form
+
+--------------------------------------------
+
+public Form1()
+        {
+            InitializeComponent();
+
+            // Calling the authorization method to get the authorized SheetsService object
+            sheetsService = GoogleSheetsAuthentication.GetService();
+        }
+
+-----------------------------------------------
+
+public class GoogleSheetsAuthentication
+    {
+        static string[] Scopes = { SheetsService.Scope.Spreadsheets };
+        static string ApplicationName = "Temperature Reader";
+        static string ClientSecretFilePath;
+
+        static GoogleSheetsAuthentication()
+        {
+            string currentDirectory = Directory.GetCurrentDirectory();
+            ClientSecretFilePath = Path.Combine(currentDirectory, "client_secret_947361990979-qtarip1envsd8d2ldjhr80pki342evco.apps.googleusercontent.com.json");
+        }
+
+        public static SheetsService GetService()
+        {
+            UserCredential credential;
+
+            using (var stream = new FileStream(ClientSecretFilePath, FileMode.Open, FileAccess.Read))
+            {
+                string credPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                credPath = Path.Combine(credPath, ".credentials/sheets-dotnet-quickstart.json");
+
+                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                    GoogleClientSecrets.Load(stream).Secrets, Scopes, "user",
+                    CancellationToken.None,
+                    new FileDataStore(credPath, true)).Result;
+                Console.WriteLine("Credential file saved to: " + credPath);
+            }
+
+            // Create Google Sheets service using the authorized credential
+            return new SheetsService(new Google.Apis.Services.BaseClientService.Initializer()
+            {
+                HttpClientInitializer = credential,
+                ApplicationName = ApplicationName,
+            });
+        }
+    }
