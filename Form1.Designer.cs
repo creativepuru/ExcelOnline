@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
@@ -38,6 +39,12 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.labelRead = new System.Windows.Forms.Label();
             this.labelWrite = new System.Windows.Forms.Label();
+            this.comboBoxCOM = new System.Windows.Forms.ComboBox();
+            this.comboBoxBaud = new System.Windows.Forms.ComboBox();
+            this.buttonConnect = new System.Windows.Forms.Button();
+            this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // textBox1
@@ -232,16 +239,82 @@
             this.labelWrite.TabIndex = 10;
             this.labelWrite.Text = "Write";
             // 
+            // comboBoxCOM
+            // 
+            this.comboBoxCOM.FormattingEnabled = true;
+            this.comboBoxCOM.Items.AddRange(new object[] {
+            "COM1",
+            "COM2",
+            "COM3",
+            "COM4",
+            "COM5",
+            "COM6",
+            "COM7",
+            "COM8",
+            "COM9",
+            "COM10"});
+            this.comboBoxCOM.Location = new System.Drawing.Point(85, 174);
+            this.comboBoxCOM.Name = "comboBoxCOM";
+            this.comboBoxCOM.Size = new System.Drawing.Size(121, 24);
+            this.comboBoxCOM.TabIndex = 11;
+            this.comboBoxCOM.Text = "COM3";
+            // 
+            // comboBoxBaud
+            // 
+            this.comboBoxBaud.FormattingEnabled = true;
+            this.comboBoxBaud.Items.AddRange(new object[] {
+            "12800",
+            "9600",
+            "4800",
+            "2400",
+            "1200",
+            "600",
+            "300",
+            "150"});
+            this.comboBoxBaud.Location = new System.Drawing.Point(238, 174);
+            this.comboBoxBaud.Name = "comboBoxBaud";
+            this.comboBoxBaud.Size = new System.Drawing.Size(121, 24);
+            this.comboBoxBaud.TabIndex = 11;
+            this.comboBoxBaud.Text = "9600";
+            // 
+            // buttonConnect
+            // 
+            this.buttonConnect.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonConnect.Location = new System.Drawing.Point(388, 170);
+            this.buttonConnect.Name = "buttonConnect";
+            this.buttonConnect.Size = new System.Drawing.Size(148, 33);
+            this.buttonConnect.TabIndex = 12;
+            this.buttonConnect.Text = "Connect";
+            this.buttonConnect.UseVisualStyleBackColor = true;
+            this.buttonConnect.Click += new System.EventHandler(this.buttonConnect_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // textBox3
+            // 
+            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox3.Location = new System.Drawing.Point(591, 175);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(75, 22);
+            this.textBox3.TabIndex = 5;
+            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(703, 165);
+            this.ClientSize = new System.Drawing.Size(730, 235);
+            this.Controls.Add(this.buttonConnect);
+            this.Controls.Add(this.comboBoxBaud);
+            this.Controls.Add(this.comboBoxCOM);
             this.Controls.Add(this.labelWrite);
             this.Controls.Add(this.labelRead);
             this.Controls.Add(this.buttonWrite);
             this.Controls.Add(this.comboBox4);
             this.Controls.Add(this.comboBox3);
+            this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.buttonRead);
             this.Controls.Add(this.comboBox2);
@@ -251,6 +324,8 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -268,6 +343,12 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label labelRead;
         private System.Windows.Forms.Label labelWrite;
+        private System.Windows.Forms.ComboBox comboBoxCOM;
+        private System.Windows.Forms.ComboBox comboBoxBaud;
+        private System.Windows.Forms.Button buttonConnect;
+        private System.IO.Ports.SerialPort serialPort1;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.TextBox textBox3;
     }
 }
 

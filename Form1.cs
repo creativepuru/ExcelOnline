@@ -79,6 +79,70 @@ namespace ExcelOnline
                 var updateResponse = await updateRequest.ExecuteAsync();
             }));
         }
+
+        public bool isConnect = false;
+
+        private void buttonConnect_Click(object sender, EventArgs e)
+        {
+            isConnect = !isConnect;
+            
+            if (isConnect)
+            {
+                serialPort1.PortName = comboBoxCOM.Text;
+                serialPort1.BaudRate = int.Parse(comboBoxBaud.Text);
+                serialPort1.Open();
+                timer1.Enabled = true;
+                timer1.Interval = 1000;
+
+                buttonConnect.Text = "Disconnect";
+            }
+            else
+            {
+                
+                serialPort1.Close();
+                timer1.Stop();
+                buttonConnect.Text = "Connect";
+            }
+            
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            this.Invoke(method: new Action(async () =>
+            {
+                // Reading data from Spreadsheet
+                var spreadsheetId = "1mJaB-cHFzEjvJDtat8mvmrHq5ABqpsW4WR8ZNnRAyHE";
+                var range = "Sheet1!B1";
+
+                var request = sheetsService.Spreadsheets.Values.Get(spreadsheetId, range);
+                var response = await request.ExecuteAsync();
+
+                IList<IList<object>> values = response.Values;
+
+                if (values != null && values.Count > 0)
+                {
+                    textBox3.Text = values[0][0].ToString();
+                }
+                else
+                {
+                    ;
+                }
+
+            }));
+
+            serialPort1.Write(textBox3.Text);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            timer1.Stop();
+            serialPort1.Close();
+        }
     }
 
     public class GoogleSheetsAuthentication
