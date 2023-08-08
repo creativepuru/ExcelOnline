@@ -98,7 +98,6 @@ namespace ExcelOnline
             }
             else
             {
-                
                 serialPort1.Close();
                 timer1.Stop();
                 buttonConnect.Text = "Connect";

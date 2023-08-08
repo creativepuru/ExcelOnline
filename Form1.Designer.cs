@@ -173,7 +173,7 @@
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(121, 24);
             this.comboBox4.TabIndex = 7;
-            this.comboBox4.Text = "5";
+            this.comboBox4.Text = "1";
             // 
             // comboBox3
             // 
@@ -218,7 +218,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(148, 22);
             this.textBox2.TabIndex = 5;
-            this.textBox2.Text = "0";
+            this.textBox2.Text = "L";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // labelRead
