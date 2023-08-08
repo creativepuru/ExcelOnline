@@ -137,7 +137,7 @@
             // buttonWrite
             // 
             this.buttonWrite.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonWrite.Location = new System.Drawing.Point(591, 87);
+            this.buttonWrite.Location = new System.Drawing.Point(591, 91);
             this.buttonWrite.Name = "buttonWrite";
             this.buttonWrite.Size = new System.Drawing.Size(75, 34);
             this.buttonWrite.TabIndex = 8;
@@ -305,7 +305,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(730, 235);
+            this.ClientSize = new System.Drawing.Size(709, 235);
             this.Controls.Add(this.buttonConnect);
             this.Controls.Add(this.comboBoxBaud);
             this.Controls.Add(this.comboBoxCOM);
