@@ -14,7 +14,6 @@ using Google.Apis.Sheets.v4;
 using Google.Apis.Sheets.v4.Data;
 using Google.Apis.Util.Store;
 
-
 namespace ExcelOnline
 {
     public partial class Form1 : Form

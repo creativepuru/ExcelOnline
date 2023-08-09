@@ -1,0 +1,50 @@
+private void buttonRead_Click(object sender, EventArgs e)
+        {
+            this.Invoke(method: new Action(async () =>
+            {
+                // Reading data from Spreadsheet
+                var spreadsheetId = "1mJaB-cHFzEjvJDtat8mvmrHq5ABqpsW4WR8ZNnRAyHE";
+                var range = comboBox1.Text + comboBox2.Text;
+
+                var request = sheetsService.Spreadsheets.Values.Get(spreadsheetId, range);
+                var response = await request.ExecuteAsync();
+
+                IList<IList<object>> values = response.Values;
+
+                if (values != null && values.Count > 0)
+                {
+                    textBox1.Text = values[0][0].ToString();
+                }
+                else
+                {
+                    textBox1.Text = "No Data Found!";
+                }
+
+            }));
+        }
+
+        private void buttonWrite_Click(object sender, EventArgs e)
+        {
+            this.Invoke(method: new Action(async () =>
+            {
+                var rowData = new List<object>
+                {
+                    textBox2.Text
+                };
+
+                // Writing data to Google Sheet
+                var spreadsheetId = "1mJaB-cHFzEjvJDtat8mvmrHq5ABqpsW4WR8ZNnRAyHE";
+                var range = comboBox3.Text + comboBox4.Text;
+                var valueRange = new ValueRange
+                {
+                    Values = new List<IList<object>> { rowData }
+                };
+
+                var updateRequest = sheetsService.Spreadsheets.Values.Update(valueRange, spreadsheetId, range);
+
+                updateRequest.ValueInputOption =
+                    SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
+
+                var updateResponse = await updateRequest.ExecuteAsync();
+            }));
+        }
